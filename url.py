@@ -6,6 +6,8 @@ class Url:
 
     REGISTER_PAGE = "https://stellarburgers.education-services.ru/register"             #Страница регистрации
 
-    LIGIN_PAGE = "https://stellarburgers.education-services.ru/login"                   #Страница входа в аккаунт
+    LOGIN_PAGE = "https://stellarburgers.education-services.ru/login"                   #Страница входа в аккаунт
 
     FORGOT_PASSWORD_PAGE = "https://stellarburgers.education-services.ru/forgot-password" #Страница восстановления пароля
+
+    ACCOUNT = "https://stellarburgers.education-services.ru/account/profile"            #Личный кабинет
