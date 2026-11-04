@@ -1,24 +1,98 @@
 from selenium.webdriver.common.by import By
 
+
 class Locators:
-    # Локаторы для Регистрации
+    # Поле «Имя» на странице регистрации.
+    NAME_INPUT = (
+        By.XPATH,
+        "//label[normalize-space(.)='Имя']/following-sibling::input[1]",
+    )
 
-    name_reg = (By.XPATH, "//label[text()='Имя']")                          #Поле Имя (регистрация)
-    email_reg = (By.XPATH, "//label[text()='Email']")                       #Поле Email (регистрация)
-    password_reg = (By.XPATH, "//label[text()='Пароль']")                   #Поле Пароль (регистрация)
-    reg_btn = (By.XPATH, "//button[text()='Зарегистрироваться']")       #Кнопка Зарегистрироваться (регистрация)
+    # Поле «Email» на страницах регистрации и входа.
+    EMAIL_INPUT = (
+        By.XPATH,
+        "//label[normalize-space(.)='Email']/following-sibling::input[1]",
+    )
 
-    # Вход в аккаунт
+    # Поле «Пароль» на страницах регистрации и входа.
+    PASSWORD_INPUT = (
+        By.XPATH,
+        "//label[normalize-space(.)='Пароль']/following-sibling::input[1]",
+    )
 
-    login_btn_home_page = (By.XPATH, "//button[text()='Войти в аккаунт']")      #Кнопка войти в аккаунт на гл. странице
-    email_login = (By.XPATH, "//input[@name='name' and @type='text']")          #Поле Email для входа в аккаунт
-    password_login = (By.XPATH, "//input[@name='Пароль' and @type='password']") #Поле Пароль для входа в аккаунт
-    login_btn_personal_account = (By.XPATH, "//button[text()='Войти']")         #Кнопка войти в личном кабинете
+    # Кнопка отправки формы регистрации.
+    REGISTER_BUTTON = (
+        By.XPATH,
+        "//button[normalize-space(.)='Зарегистрироваться']",
+    )
 
-    # Кнопки на главной странице
+    # Сообщение об ошибке в поле при некорректном пароле.
+    PASSWORD_ERROR = (
+        By.XPATH,
+        "//*[contains(@class, 'input__error')]",
+    )
 
-    construktor_btn = (By.XPATH, "//p[text()='Конструктор']")                   #Кнопка Конструктор
-    logo_btn = (By.XPATH,"//a[@CLASS='active']")                                #Кнопка - логотип на главной странице
-    buns_btn = (By.XPATH, "//span[text()='Булки']")                             #Кнопка Булки
-    sauces_btn = (By.XPATH, "//span[text()='Соусы']")                           #Кнопка Соусы
-    fillings_btn = (By.XPATH, "//span[text()='Начинки']")                       #Кнопка Начинки
+    # Кнопка «Войти в аккаунт» на главной странице.
+    HOME_LOGIN_BUTTON = (
+        By.XPATH,
+        "//*[self::button or self::a]"
+        "[normalize-space(.)='Войти в аккаунт']",
+    )
+
+    # Ссылка «Личный кабинет» в шапке сайта.
+    PERSONAL_ACCOUNT_LINK = (
+        By.XPATH,
+        "//a[contains(@href, '/account')]",
+    )
+
+    # Ссылка для перехода к форме входа.
+    LOGIN_LINK = (
+        By.XPATH,
+        "//a[contains(@href, '/login')]",
+    )
+
+    # Кнопка отправки формы входа.
+    LOGIN_BUTTON = (
+        By.XPATH,
+        "//button[normalize-space(.)='Войти']",
+    )
+
+    # Кнопка выхода из личного кабинета.
+    LOGOUT_BUTTON = (
+        By.XPATH,
+        "//button[normalize-space(.)='Выйти' "
+        "or normalize-space(.)='Выход']",
+    )
+
+    # Ссылка «Конструктор» в шапке сайта.
+    CONSTRUCTOR_LINK = (
+        By.XPATH,
+        "//a[.//p[normalize-space(.)='Конструктор']]",
+    )
+
+    # Логотип, ведущий на главную страницу.
+    LOGO_LINK = (
+        By.XPATH,
+        "//a[@href='/' and .//*[local-name()='svg']]",
+    )
+
+    # Вкладка конструктора «Булки».
+    BUNS_TAB = (
+        By.XPATH,
+        "//*[contains(@class, 'tab_tab') "
+        "and .//span[normalize-space(.)='Булки']]",
+    )
+
+    # Вкладка конструктора «Соусы».
+    SAUCES_TAB = (
+        By.XPATH,
+        "//*[contains(@class, 'tab_tab') "
+        "and .//span[normalize-space(.)='Соусы']]",
+    )
+
+    # Вкладка конструктора «Начинки».
+    FILLINGS_TAB = (
+        By.XPATH,
+        "//*[contains(@class, 'tab_tab') "
+        "and .//span[normalize-space(.)='Начинки']]",
+    )
