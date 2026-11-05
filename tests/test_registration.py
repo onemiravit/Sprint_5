@@ -21,23 +21,23 @@ def test_successful_registration(driver):
     assert len(password) >= 6
 
     # Открываем страницу регистрации.
-    driver.get(Url.REGISTER_PAGE)
+    driver.get(Url.register_page)
 
     # Заполняем поле «Имя».
     name_input = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.NAME_INPUT)
+        EC.visibility_of_element_located(L.name_input)
     )
     name_input.send_keys(name)
 
     # Заполняем поле «Email».
     email_input = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.EMAIL_INPUT)
+        EC.visibility_of_element_located(L.email_input)
     )
     email_input.send_keys(email)
 
     # Заполняем поле «Пароль».
     password_input = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.PASSWORD_INPUT)
+        EC.visibility_of_element_located(L.password_input)
     )
     password_input.send_keys(password)
 
@@ -48,17 +48,17 @@ def test_successful_registration(driver):
 
     # Отправляем форму регистрации.
     WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.REGISTER_BUTTON)
+        EC.element_to_be_clickable(L.register_button)
     ).click()
 
     # Ждём перехода на страницу входа после успешной регистрации.
     WebDriverWait(driver, 10).until(
         lambda browser: browser.current_url.rstrip("/")
-        == Url.LOGIN_PAGE.rstrip("/")
+        == Url.login_page.rstrip("/")
     )
 
     # Проверяем, что открылась страница входа.
-    assert driver.current_url.rstrip("/") == Url.LOGIN_PAGE.rstrip("/")
+    assert driver.current_url.rstrip("/") == Url.login_page.rstrip("/")
 
 
 def test_registration_shows_error_for_short_password(driver):
@@ -72,31 +72,31 @@ def test_registration_shows_error_for_short_password(driver):
     assert len(password) < 6
 
     # Открываем страницу регистрации.
-    driver.get(Url.REGISTER_PAGE)
+    driver.get(Url.register_page)
 
     # Заполняем поле «Имя».
     WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.NAME_INPUT)
+        EC.visibility_of_element_located(L.name_input)
     ).send_keys(name)
 
     # Заполняем поле «Email».
     WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.EMAIL_INPUT)
+        EC.visibility_of_element_located(L.email_input)
     ).send_keys(email)
 
     # Заполняем поле «Пароль» коротким значением.
     WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.PASSWORD_INPUT)
+        EC.visibility_of_element_located(L.password_input)
     ).send_keys(password)
 
     # Отправляем форму.
     WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.REGISTER_BUTTON)
+        EC.element_to_be_clickable(L.register_button)
     ).click()
 
     # Ждём отображения ошибки валидации.
     error = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.PASSWORD_ERROR)
+        EC.visibility_of_element_located(L.password_error)
     )
 
     # Проверяем, что отображается сообщение об ошибке пароля.
@@ -104,4 +104,4 @@ def test_registration_shows_error_for_short_password(driver):
     assert "парол" in error_text or "6" in error_text
 
     # Проверяем, что регистрация не завершилась переходом на страницу входа.
-    assert driver.current_url.rstrip("/") == Url.REGISTER_PAGE.rstrip("/")
+    assert driver.current_url.rstrip("/") == Url.register_page.rstrip("/")

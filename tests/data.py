@@ -1,5 +1,5 @@
 # Email заранее зарегистрированного тестового аккаунта.
-VALID_EMAIL = "alexey_mironov56999@gmail.com"
+valid_email = "alexey_mironov56999@gmail.com"
 
 # Валидный пароль этого аккаунта.
-VALID_PASSWORD = "123456"
+valid_password = "123456"
