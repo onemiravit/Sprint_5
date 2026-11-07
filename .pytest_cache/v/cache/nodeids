@@ -1,1 +1,15 @@
-[]
+[
+  "tests/test_account.py::TestPersonalAccount::test_click_personal_account_opens_account_page",
+  "tests/test_account.py::TestPersonalAccount::test_constructor_link_from_account_opens_home_page",
+  "tests/test_account.py::TestPersonalAccount::test_logo_from_account_opens_home_page",
+  "tests/test_account.py::TestPersonalAccount::test_logout_from_account",
+  "tests/test_constructor.py::TestConstructor::test_buns_tab_can_be_selected",
+  "tests/test_constructor.py::TestConstructor::test_fillings_tab_can_be_selected",
+  "tests/test_constructor.py::TestConstructor::test_sauces_tab_can_be_selected",
+  "tests/test_login.py::TestLogin::test_login_from_forgot_password_page",
+  "tests/test_login.py::TestLogin::test_login_from_home_page_button",
+  "tests/test_login.py::TestLogin::test_login_from_registration_page",
+  "tests/test_login.py::TestLogin::test_login_via_personal_account_button",
+  "tests/test_registration.py::test_registration_shows_error_for_short_password",
+  "tests/test_registration.py::test_successful_registration"
+]
