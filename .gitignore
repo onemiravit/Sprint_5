@@ -7,6 +7,8 @@ venv/
 env/
 pyvenv.cfg
 Lib/
+.pytest_cache/
+.venv.worktrees/
 # ========================
 # Python
 # ========================
