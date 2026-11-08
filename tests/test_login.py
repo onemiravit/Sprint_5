@@ -2,164 +2,155 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import Locators as L
-from tests.data import valid_email, valid_password
+from data import valid_email, valid_password
 from urls import Url
 
 
-def test_login_from_home_page_button(driver):
-    # Открываем главную страницу.
-    driver.get(Url.home_page)
+class TestLogin:
+    def test_login_from_home_page_button(self, driver):
+        # Открываем главную страницу.
+        driver.get(Url.home_page)
 
-    # Нажимаем «Войти в аккаунт».
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.home_login_button)
-    ).click()
+        # Нажимаем «Войти в аккаунт».
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.home_login_button)
+        ).click()
 
-    # Ждём открытия страницы входа.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.login_page.rstrip("/")
-    )
+        # Ждём открытия страницы входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.login_page.rstrip("/")
+        )
 
-    # Вводим email заранее зарегистрированного аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.email_input)
-    ).send_keys(valid_email)
+        # Вводим email и пароль заранее зарегистрированного аккаунта.
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.email_input)
+        ).send_keys(valid_email)
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.password_input)
+        ).send_keys(valid_password)
 
-    # Вводим пароль заранее зарегистрированного аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.password_input)
-    ).send_keys(valid_password)
+        # Нажимаем «Войти».
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_button)
+        ).click()
 
-    # Нажимаем «Войти».
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_button)
-    ).click()
+        # Ждём перехода на главную страницу после входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.home_page.rstrip("/")
+        )
 
-    # Ждём перехода на главную страницу после входа.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.home_page.rstrip("/")
-    )
+        # Проверяем успешный вход.
+        assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
 
-    # Проверяем успешный вход.
-    assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
+    def test_login_via_personal_account_button(self, driver):
+        # Открываем главную страницу.
+        driver.get(Url.home_page)
 
+        # Нажимаем «Личный кабинет».
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.personal_account_link)
+        ).click()
 
-def test_login_via_personal_account_button(driver):
-    # Открываем главную страницу.
-    driver.get(Url.home_page)
+        # Ждём открытия страницы входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.login_page.rstrip("/")
+        )
 
-    # Нажимаем «Личный кабинет».
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.personal_account_link)
-    ).click()
+        # Вводим email и пароль аккаунта.
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.email_input)
+        ).send_keys(valid_email)
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.password_input)
+        ).send_keys(valid_password)
 
-    # Для неавторизованного пользователя должна открыться страница входа.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.login_page.rstrip("/")
-    )
+        # Отправляем форму входа.
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_button)
+        ).click()
 
-    # Вводим email аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.email_input)
-    ).send_keys(valid_email)
+        # Ждём перехода на главную страницу после входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.home_page.rstrip("/")
+        )
 
-    # Вводим пароль аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.password_input)
-    ).send_keys(valid_password)
+        # Проверяем успешный вход.
+        assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
 
-    # Отправляем форму входа.
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_button)).click()
+    def test_login_from_registration_page(self, driver):
+        # Открываем страницу регистрации.
+        driver.get(Url.register_page)
 
-    # Ждём перехода на главную страницу.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.home_page.rstrip("/")
-    )
+        # Нажимаем ссылку перехода ко входу.
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_link)
+        ).click()
 
-    # Проверяем успешный вход.
-    assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
+        # Ждём открытия страницы входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.login_page.rstrip("/")
+        )
 
+        # Вводим email и пароль аккаунта.
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.email_input)
+        ).send_keys(valid_email)
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.password_input)
+        ).send_keys(valid_password)
 
-def test_login_from_registration_page(driver):
-    # Открываем страницу регистрации.
-    driver.get(Url.register_page)
+        # Нажимаем кнопку входа.
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_button)
+        ).click()
 
-    # Нажимаем ссылку перехода ко входу.
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_link)
-    ).click()
+        # Ждём перехода на главную страницу после входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.home_page.rstrip("/")
+        )
 
-    # Ждём открытия страницы входа.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.login_page.rstrip("/")
-    )
+        # Проверяем успешный вход.
+        assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
 
-    # Вводим email аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.email_input)
-    ).send_keys(valid_email)
+    def test_login_from_forgot_password_page(self, driver):
+        # Открываем страницу восстановления пароля.
+        driver.get(Url.forgot_password_page)
 
-    # Вводим пароль аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.password_input)
-    ).send_keys(valid_password)
+        # Нажимаем ссылку перехода ко входу.
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_link)
+        ).click()
 
-    # Нажимаем кнопку входа.
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_button)
-    ).click()
+        # Ждём открытия страницы входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.login_page.rstrip("/")
+        )
 
-    # Ждём перехода на главную страницу.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.home_page.rstrip("/")
-    )
+        # Вводим email и пароль аккаунта.
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.email_input)
+        ).send_keys(valid_email)
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(L.password_input)
+        ).send_keys(valid_password)
 
-    # Проверяем успешный вход.
-    assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
+        # Отправляем форму входа.
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(L.login_button)
+        ).click()
 
+        # Ждём перехода на главную страницу после входа.
+        WebDriverWait(driver, 10).until(
+            lambda browser: browser.current_url.rstrip("/")
+            == Url.home_page.rstrip("/")
+        )
 
-def test_login_from_forgot_password_page(driver):
-    # Открываем страницу восстановления пароля.
-    driver.get(Url.forgot_password_page)
-
-    # Нажимаем ссылку перехода ко входу.
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_link)
-    ).click()
-
-    # Ждём открытия страницы входа.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.login_page.rstrip("/")
-    )
-
-    # Вводим email аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.email_input)
-    ).send_keys(valid_email)
-
-    # Вводим пароль аккаунта.
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(L.password_input)
-    ).send_keys(valid_password)
-
-    # Отправляем форму входа.
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(L.login_button)
-    ).click()
-
-    # Ждём перехода на главную страницу.
-    WebDriverWait(driver, 10).until(
-        lambda browser: browser.current_url.rstrip("/")
-        == Url.home_page.rstrip("/")
-    )
-
-    # Проверяем успешный вход.
-    assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
+        # Проверяем успешный вход.
+        assert driver.current_url.rstrip("/") == Url.home_page.rstrip("/")
