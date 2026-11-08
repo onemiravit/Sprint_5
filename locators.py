@@ -5,19 +5,22 @@ class Locators:
     # Поле «Имя» на странице регистрации.
     name_input = (
         By.XPATH,
-        "//label[normalize-space(.)='Имя']/following-sibling::input[1]",
+        "//label[normalize-space(.)='Имя']"
+        "/following-sibling::input[@name='name' and @type='text']",
     )
 
     # Поле «Email» на страницах регистрации и входа.
     email_input = (
         By.XPATH,
-        "//label[normalize-space(.)='Email']/following-sibling::input[1]",
+        "//label[normalize-space(.)='Email']"
+        "/following-sibling::input[@name='name' and @type='text']",
     )
 
     # Поле «Пароль» на страницах регистрации и входа.
     password_input = (
         By.XPATH,
-        "//label[normalize-space(.)='Пароль']/following-sibling::input[1]",
+        "//label[normalize-space(.)='Пароль']"
+        "/following-sibling::input[@name='Пароль' and @type='password']",
     )
 
     # Кнопка отправки формы регистрации.
