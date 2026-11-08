@@ -1,3 +1,6 @@
+# Имя зарегистрированоого пользователя
+registred_name = "Alexey"
+
 # Email заранее зарегистрированного тестового аккаунта.
 valid_email = "alexey_mironov56999@gmail.com"
 
