@@ -8,9 +8,6 @@ def driver():
     # Настраиваем запуск Chrome.
     options = Options()
 
-    # Для запуска браузера без окна можно раскомментировать:
-    # options.add_argument("--headless=new")
-
     # Создаём отдельный браузер для текущего теста.
     driver = webdriver.Chrome(options=options)
 
