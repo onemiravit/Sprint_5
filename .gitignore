@@ -1,0 +1,60 @@
+# Created by pytest automatically.
+# ========================
+# Виртуальное окружение
+# ========================
+venv/
+.venv/
+env/
+pyvenv.cfg
+Lib/
+.pytest_cache/
+.venv.worktrees/
+# ========================
+# Python
+# ========================
+__init__.py
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ========================
+# IDE — VS Code
+# ========================
+.vscode/
+*.code-workspace
+
+# ========================
+# Selenium / Тесты
+# ========================
+*.log
+screenshots/
+reports/
+allure-results/
+allure-report/
+*.html
+
+# ========================
+# Переменные окружения
+# ========================
+.env
+.env.*
+
+# ========================
+# Операционная система
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Прочее
+# ========================
+*.tmp
+*.swp
+.idea/*
+.gitignore
